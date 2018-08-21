@@ -99,6 +99,7 @@ OnvifManager.prototype.initWebSocketConnection = function() {
 		this.showMessageModal('Error', 'Failed to establish a WebSocket connection. Check if the server.js is running.');
 	}.bind(this);
 	this.ws.onmessage = function(res) {
+		console.log(res);
 		var data = JSON.parse(res.data);
 		var id = data.id;
 		if(id === 'startDiscovery') {
