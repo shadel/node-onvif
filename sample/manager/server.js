@@ -146,6 +146,9 @@ function startDiscovery(conn) {
 }
 
 function getDevice(address) {
+	if (devices[address]) {
+		return devices[address];
+	}
 	let xaddr = `http://${address}/onvif/device_service`;
 	let odevice = new onvif.OnvifDevice({
 		xaddr: xaddr
@@ -183,12 +186,13 @@ function connect(conn, params) {
 // ------------------------------------------------------
 
 function fetchSnapshot(conn, params) {
+	console.log('fetchSnapshot', params);
 	// For Debug --------------------------------------------
 	//if(start_time === 0) {
 	//	start_time = Date.now();
 	//}
 	// ------------------------------------------------------
-	var device = devices[params.address];
+	var device = getDevice(params.address);
 	if(!device) {
 		var res = {'id': 'fetchSnapshot', 'error': 'The specified device is not found: ' + params.address};
 		conn.send(JSON.stringify(res));
@@ -222,7 +226,8 @@ function fetchSnapshot(conn, params) {
 }
 
 function ptzMove(conn, params) {
-	var device = devices[params.address];
+	console.log('ptzMove', params);
+	var device =getDevice(params.address);
 	if(!device) {
 		var res = {'id': 'ptzMove', 'error': 'The specified device is not found: ' + params.address};
 		conn.send(JSON.stringify(res));
@@ -240,7 +245,8 @@ function ptzMove(conn, params) {
 }
 
 function ptzStop(conn, params) {
-	var device = devices[params.address];
+	console.log('ptzStop', params);
+	var device =getDevice(params.address);
 	if(!device) {
 		var res = {'id': 'ptzStop', 'error': 'The specified device is not found: ' + params.address};
 		conn.send(JSON.stringify(res));
@@ -258,7 +264,8 @@ function ptzStop(conn, params) {
 }
 
 function ptzHome(conn, params) {
-	var device = devices[params.address];
+	console.log('ptzHome', params);
+	var device =getDevice(params.address);
 	if(!device) {
 		var res = {'id': 'ptzMove', 'error': 'The specified device is not found: ' + params.address};
 		conn.send(JSON.stringify(res));
