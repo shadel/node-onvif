@@ -251,6 +251,8 @@ OnvifManager.prototype.ptzGotoHome = function(event) {
 };
 
 OnvifManager.prototype.ptzMove = function(event) {
+	console.log('ptzMove',event, this.device_connected, this.ptz_moving);
+
 	if(this.device_connected === false || this.ptz_moving === true) {
 		return;
 	}
