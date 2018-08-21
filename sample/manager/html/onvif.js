@@ -11,7 +11,7 @@ function OnvifManager() {
 	this.ws = null; // WebSocket object
 	this.el = { // jQuery objects for the HTML elements
 		'frm_con' : $('#connect-form'),
-		'sel_dev' : $('#connect-form select[name="device"]'),
+		'sel_dev' : $('#connect-form input[name="device"]'),
 		'inp_usr' : $('#connect-form input[name="user"]'),
 		'inp_pas' : $('#connect-form input[name="pass"]'),
 		'btn_con' : $('#connect-form button[name="connect"]'),
@@ -89,7 +89,7 @@ OnvifManager.prototype.initWebSocketConnection = function() {
 	this.ws = new WebSocket('ws://' + document.location.host);
 	this.ws.onopen = function() {
 		console.log('WebSocket connection established.');
-		this.sendRequest('startDiscovery');
+		// this.sendRequest('startDiscovery');
 	}.bind(this);
 	this.ws.onclose = function(event) {
 		console.log('WebSocket connection closed.');
